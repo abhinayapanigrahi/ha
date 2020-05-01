@@ -15,7 +15,12 @@ function getPage($page){
    switch($page){
       case "users":
       case "dashboard":
+      case "categorymanagement":
+      case "articlemanagement":
       case "contentmanagement":
+      case "digitalcontentmanagement":
+      case "eventmanagement":
+      case "newsmanagement":
       $returnPage = "./hadmin/".$page;
       break;
       default:
@@ -34,4 +39,11 @@ function isSessionActive(){
 function getLogedInUser(){
    return $_SESSION["uname"];
 } 
+function getDesignationChecked($desig){
+   if($_SESSION["desig"] == $desig){
+      return true;
+   } else {
+      return false;
+   }
+}
 ?>

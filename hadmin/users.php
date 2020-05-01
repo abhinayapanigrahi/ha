@@ -11,7 +11,7 @@ $objUser = new usersPrcessor();
 ?>
 
 <h1>User Management</h1>
-<p> In this Section Adding User, Editing User, Updating User is Completed</p>
+
 <div class="pagewrap">
 <a href="./index.php?page=users&action=add">Add User</a>
 <?php
@@ -32,7 +32,7 @@ $showForm = '';
             $showForm = 'update';
             break;
             case "save":
-                if(!empty($_REQUEST['submitaddForm'])){
+            if(!empty($_REQUEST['submitaddForm'])){
                 echo $addedUserId = $objUser->saveUserDetails($_REQUEST);
                 }
                 
@@ -43,28 +43,28 @@ $showForm = '';
     if($showForm == 'add'){
         ?>
         
-        <form name="adduser" method="POST" action="./index.php?page=users&action=save">
+        <form name="adduser" method="POST" onsubmit="return validateUserForm(this);" action="./index.php?page=users&action=save" >
             <h2>Add User</h2>
             <table>
                 <tr>
                     <td><lable>User Name</lable></td>
-                    <td><input type="text" name="username" /></td>
+                    <td><input type="text" name="username" id="username" autocomplete="off"/></td>
                 </tr>
                 <tr>
                     <td><lable>Password</lable>
-                    <td><input type="password" name="password" /></td>
+                    <td><input type="password" name="password" id="password" autocomplete="off"/></td>
                 </tr>
                 <tr>
                     <td><lable>Confirm Password</lable>
-                    <td><input type="password" name="confirmpassword" /></td>
+                    <td><input type="password" name="confirmpassword" id="confirmpassword" autocomplete="off"/></td>
                 </tr>
                 <tr>
                     <td><lable>Email Id</lable></td>
-                    <td><input type="text" name="emailid" /></td>
+                    <td><input type="text" name="emailid" id="emailid" autocomplete="off"/></td>
                 </tr>
                 <tr>
                     <td><lable>Mobile No</lable></td>
-                    <td><input type="text" name="mobileno" /></td>
+                    <td><input type="text" name="mobileno" id="mobileno" autocomplete="off"/></td>
                 </tr>
                 <tr>
                     <td><lable>Designation</lable></td>
@@ -97,7 +97,7 @@ $showForm = '';
                 <tr>
                     <td></td>
                     <td><button type="submit"> Submit </button>
-                    <input type="hidden" name="submitaddForm" value="submit"/>
+                    <input type="hidden" name="submitaddForm" value="submit" />
                     </td>
                     <td><button type="submit"> Cancel </button></td>
                 </tr>
@@ -181,6 +181,7 @@ $showForm = '';
             <th>UserName</th>
             <th>Phone</th>
             <th>Email</th>
+            <th>Designation</th>
             <th>Action</th>
         </tr>
         <?php
@@ -191,6 +192,7 @@ $showForm = '';
             <td><?php echo $value->userName; ?></td>
             <td><?php echo $value->phone; ?></td>
             <td><?php echo $value->email; ?></td>
+            <td><?php echo (!empty($value->desig))?$globalData["designations"][$value->desig]:""; ?></td>
             <td><a href="./index.php?page=users&action=edit&id=<?php echo $value->userId; ?>">Edit</a></td>
         </tr><?php 
             }   

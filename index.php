@@ -3,6 +3,8 @@
 <html>
 <head>
 	<link rel="stylesheet" href="./css/index.css" />
+   <script type='text/javascript' src="./js/jquery.min.js"></script>
+   <script type='text/javascript' src="./js/common.js"></script>
 </head>
 <body>
 
@@ -27,11 +29,11 @@
             $page = (empty($page))?"home":$page;
             $page = getPage($page);
             include_once($page.".php");
-         
          ?> 
-      </div>  
+      </div>
+      <div class="clearall"></div>  
 </div>
-<div class="footer">
+<div class="footer clearall">
    <h3 style="color:darkgreen">Contact Us Link | Social media links</h3>
 </div>
 

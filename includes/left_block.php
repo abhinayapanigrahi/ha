@@ -17,20 +17,40 @@
       if(isSessionActive()){
          ?>
          <ul>
+         <?php if(getDesignationChecked('SA')) {?>
             <li>
                <a href="index.php?page=users">Users Management</a>
+            </li>
+         <?php } ?>
+         </ul>
+         <ul>
+            <li>
+               <a href="index.php?page=categorymanagement">Category Management</a>
+            </li>
+         </ul>
+         <ul>
+            <li>
+               <a href="index.php?page=articlemanagement">Article Management</a>
             </li>
          </ul>
          <ul>
             <li>
                <a href="index.php?page=contentmanagement">Content Management</a>
-                  <ul style="list-style-type:square;">
-                     <li><a href="#">Article</a></li>
-                     <li><a href="#">News</a></li>
-                     <li><a href="#">Events</a></li>
-                     <li><a href="#">Gallery</a></li>
-                     <li><a href="#">Detail's Content</a></li>
-                  </ul>
+            </li>
+         </ul>
+         <ul>
+            <li>
+               <a href="index.php?page=digitalcontentmanagement">Digital Content Management</a>
+            </li>
+         </ul>
+         <ul>
+            <li>
+               <a href="index.php?page=eventmanagement">Event Management</a>
+            </li>
+         </ul>
+         <ul>
+            <li>
+               <a href="index.php?page=newsmanagement">News Management</a>
             </li>
          </ul>
          

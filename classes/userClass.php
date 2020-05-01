@@ -5,18 +5,15 @@ class usersPrcessor extends applicationProcessor{
     function getAllUsers(){
         //$mysqliCon = $this->sqlConect();
         //echo "all users List Printed";
-            $mysqli_query = "select userId, userName, email, phone from tbl_user";
+            $mysqli_query = "select userId, userName, email, phone, desig from tbl_user";
 
             $result1 = $this->sqlConect()->query($mysqli_query);
             $resultsArr = array();
             if ($result1){
-
             while($userObj = $result1->fetch_object()){
                 array_push($resultsArr, $userObj);
             }
-
             //echo $result1->num_rows;
-
             return $resultsArr;
             }
     }
@@ -27,43 +24,43 @@ class usersPrcessor extends applicationProcessor{
             $result2 = $this->sqlConect()->query($mysqli_query1);
             $resultsArr1 = array();
             if ($result2){
-
             while($userObj = $result2->fetch_object()){
                 array_push($resultsArr1, $userObj);
             }
         }
-
             return $resultsArr1;
     }
-
-
+    
     function saveUserDetails($userObject){
-        print_r($userObject);
+        //print_r($userObject);
             if(!isset($userObject['Submit'])){
-                if(($userObject['username']) == "" || (md5($userObject['password'])) == "" || ($userObject['confirmpassword']) == "" || ($userObject['emailid']) == "" || ($userObject['mobileno']) == "" || ($userObject['designation']) == "" ){
-                    echo "All Fields Are Required";
-                }
-            else{
-                $username = $userObject['username'];
-                $password = md5($userObject['password']);
-                $confirmpassword = $userObject['confirmpassword'];
-                $emailid = $userObject['emailid'];
-                $mobileno = $userObject['mobileno'];
-                $designation = $userObject['designation'];
-                $isactive = $userObject['isactive'];
+                    if(($userObject['username']) == "" || (md5($userObject['password'])) == "" || ($userObject['confirmpassword']) == "" || ($userObject['emailid']) == "" || ($userObject['mobileno']) == "" || ($userObject['designation']) == "" ){
+                        echo "All Fields Are Required";
+                    }
+                else{
+                    $mysqli_query = "select email from tbl_user where email='".$userObject['emailid']."'";
+                    $result=$this->sqlConect()->query($mysqli_query);
+                        if($result->num_rows==1){
+                            echo "Email Id Already Registered";
+                        }
+                        else{
+                            $username = $userObject['username'];
+                            $password = md5($userObject['password']);
+                            $confirmpassword = $userObject['confirmpassword'];
+                            $emailid = $userObject['emailid'];
+                            $mobileno = $userObject['mobileno'];
+                            $designation = $userObject['designation'];
+                            $isactive = $userObject['isactive'];
 
-                $mysqli_query = "insert into tbl_user (userName, userPass, email, phone, desig,isactive) values ('$username','$password','$emailid', '$mobileno', '$designation','isactive')";
-                $this->sqlConect()->query($mysqli_query);  
-                return $this->sqlConect()->insert_id;
+                            $mysqli_query = "insert into tbl_user (userName, userPass, email, phone, desig,isactive) values ('$username','$password','$emailid', '$mobileno', '$designation','$isactive')";
+                            $this->sqlConect()->query($mysqli_query);  
+                            return $this->sqlConect()->insert_id;
+                        }
                 }
-            
             }
-
-            
-
     }
     function updateUserDetails($userObject){
-        print_r($userObject);
+        //print_r($userObject);
             $username = $userObject['username'];
             $password = md5($userObject['password']);
             //$confirmpassword = $userObject['confirmpassword'];
@@ -104,8 +101,6 @@ class usersPrcessor extends applicationProcessor{
             $mysqli_query = " update tbl_user set ".$sqlStr." where userId = ".$userObject['editID'];
             
             $this->sqlConect()->query($mysqli_query); 
-            //return $this->sqlConect()->updatedId;   
     }
 }
 ?>
-
